@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface WeatherState {
-  currentWeather: any;
-  weeklyWeather: any[];
-  yearlyWeather: any[];
+  currentWeather: unknown;
+  weeklyWeather: unknown[];
+  yearlyWeather: unknown[];
   selectedCity: string;
   selectedCountry: string;
   isLoading: boolean;
@@ -22,13 +22,13 @@ const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setCurrentWeather: (state, action: PayloadAction<any>) => {
+    setCurrentWeather: (state, action: PayloadAction<unknown>) => {
       state.currentWeather = action.payload;
     },
-    setWeeklyWeather: (state, action: PayloadAction<any[]>) => {
+    setWeeklyWeather: (state, action: PayloadAction<unknown[]>) => {
       state.weeklyWeather = action.payload;
     },
-    setYearlyWeather: (state, action: PayloadAction<any[]>) => {
+    setYearlyWeather: (state, action: PayloadAction<unknown[]>) => {
       state.yearlyWeather = action.payload;
     },
     setLocation: (
@@ -51,4 +51,5 @@ export const {
   setLocation,
   setLoading,
 } = weatherSlice.actions;
+
 export default weatherSlice.reducer;

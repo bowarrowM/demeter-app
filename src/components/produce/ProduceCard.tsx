@@ -51,7 +51,6 @@ export default function ProduceCard({ produce }: ProduceCardProps) {
           fill
           className="object-cover"
           onError={e => {
-            // Fallback to a placeholder if image fails to load
             e.currentTarget.src = `https://via.placeholder.com/300x200/e5e7eb/6b7280?text=${encodeURIComponent(produce.name)}`;
           }}
         />

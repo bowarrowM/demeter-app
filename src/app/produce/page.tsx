@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import Navbar from '@/components/ui/Navbar';
 import ProduceCard from '@/components/produce/ProduceCard';
-
+//
 const seasonalProduce = [
   {
     id: 1,
@@ -54,7 +54,7 @@ export default function ProducePage() {
   useEffect(() => {
     if (status === 'loading') return;
     if (!session) {
-      router.push('/auth/signin');
+      router.push('/auth/login');
     }
   }, [session, status, router]);
 

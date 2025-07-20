@@ -58,7 +58,7 @@ export default function SignUpPage() {
       });
 
       if (response.ok) {
-        router.push('/auth/signin?message=Account created successfully');
+        router.push('/auth/login?message=Account created successfully');
       } else {
         const data = await response.json();
         setError(
@@ -211,7 +211,7 @@ export default function SignUpPage() {
         <div className="text-sm text-center text-gray-600">
           {intl.formatMessage({ id: 'auth.signup.haveAccount' })}{' '}
           <Link
-            href="/auth/signin"
+            href="/auth/login"
             className="font-medium text-green-600 hover:text-green-500"
           >
             {intl.formatMessage({ id: 'auth.signin.link' })}

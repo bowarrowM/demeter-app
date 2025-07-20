@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  profile: any;
+  profile: unknown; //any
   preferences: {
     theme: 'light' | 'dark';
     notifications: boolean;
@@ -20,7 +20,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setProfile: (state, action: PayloadAction<any>) => {
+    setProfile: (state, action: PayloadAction<unknown>) => {
       state.profile = action.payload;
     },
     updatePreferences: (

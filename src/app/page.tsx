@@ -17,7 +17,7 @@ export default function HomePage() {
     if (session) {
       router.push('/welcome');
     } else {
-      router.push('/auth/signin');
+      router.push('/auth/login');
     }
   }, [session, status, router]);
 
@@ -37,7 +37,7 @@ export default function HomePage() {
         </h1>
         <div className="space-x-4">
           <Link
-            href="/auth/signin"
+            href="/auth/login"
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
             {intl.formatMessage({ id: 'auth.signin' })}

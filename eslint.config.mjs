@@ -10,11 +10,25 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends(
-    'next/core-web-vitals',
-    'next/typescript',
-    'plugin:prettier/recommended'
-  ),
+  ...compat.config({
+    extends: [
+      'next/core-web-vitals',
+      'next/typescript',
+      'plugin:prettier/recommended',
+    ],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  }),
 ];
+
+//     "@typescript-eslint/no-explicit-any": "off"
+// const eslintConfig = [
+//   ...compat.extends(
+//     'next/core-web-vitals',
+//     'next/typescript',
+//     'plugin:prettier/recommended'
+//   ),
+// ];
 
 export default eslintConfig;

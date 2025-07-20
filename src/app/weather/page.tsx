@@ -18,7 +18,7 @@ export default function WeatherPage() {
   useEffect(() => {
     if (status === 'loading') return;
     if (!session) {
-      router.push('/auth/signin');
+      router.push('/auth/login');
     }
   }, [session, status, router]);
 

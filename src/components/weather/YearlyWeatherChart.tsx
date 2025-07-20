@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import {
   Chart as ChartJS,
+  ChartData,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -20,16 +21,16 @@ ChartJS.register(
   PointElement,
   LineElement,
   Title,
-  Tooltip,
-  Legend
+  Tooltip
+  // Legend
 );
 
 export default function YearlyWeatherChart() {
   const intl = useIntl();
-  const [chartData, setChartData] = useState<any>(null);
+  const [chartData, setChartData] = useState<ChartData<'line'> | null>(null);
 
   useEffect(() => {
-    // Generate mock yearly data - replace with actual API call
+    // Generate mock yearly data -> replace with actual API call
     const months = Array.from({ length: 12 }, (_, i) =>
       new Date(2024, i).toLocaleDateString(intl.locale, { month: 'short' })
     );

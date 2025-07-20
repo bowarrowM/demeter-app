@@ -32,43 +32,54 @@ export default function WeatherCard({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    //
+
+    const fetchWeatherData = async () => {
+      setLoading(true);
+      try {
+        const type = viewType === 'today' ? 'current' : 'weekly';
+        const response = await fetch(
+          `/api/weather?city=${selectedCity}&type=${type}`
+        );
+        const data = await response.json();
+
+        if (viewType === 'today') {
+          setWeatherData({
+            temperature: Math.round(data.main.temp),
+            description: data.weather[0].description,
+            humidity: data.main.humidity,
+            windSpeed: data.wind.speed,
+            icon: data.weather[0].icon,
+          });
+        } else {
+          // Process weekly forecast data
+          // added item type details, any caused eslint format issues
+          const processedWeekly = data.list
+            .slice(0, 7)
+            .map(
+              (item: {
+                main: { temp: number; humidity: number };
+                weather: { description: string; icon: string }[];
+                wind: { speed: number };
+              }) => ({
+                temperature: Math.round(item.main.temp),
+                description: item.weather[0].description,
+                humidity: item.main.humidity,
+                windSpeed: item.wind.speed,
+                icon: item.weather[0].icon,
+              })
+            );
+
+          setWeeklyData(processedWeekly);
+        }
+      } catch (error) {
+        console.error('Failed to fetch weather:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchWeatherData();
   }, [selectedCity, viewType]);
-
-  const fetchWeatherData = async () => {
-    setLoading(true);
-    try {
-      const type = viewType === 'today' ? 'current' : 'weekly';
-      const response = await fetch(
-        `/api/weather?city=${selectedCity}&type=${type}`
-      );
-      const data = await response.json();
-
-      if (viewType === 'today') {
-        setWeatherData({
-          temperature: Math.round(data.main.temp),
-          description: data.weather[0].description,
-          humidity: data.main.humidity,
-          windSpeed: data.wind.speed,
-          icon: data.weather[0].icon,
-        });
-      } else {
-        // Process weekly forecast data
-        const processedWeekly = data.list.slice(0, 7).map((item: any) => ({
-          temperature: Math.round(item.main.temp),
-          description: item.weather[0].description,
-          humidity: item.main.humidity,
-          windSpeed: item.wind.speed,
-          icon: item.weather[0].icon,
-        }));
-        setWeeklyData(processedWeekly);
-      }
-    } catch (error) {
-      console.error('Failed to fetch weather:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getWeatherIcon = (iconCode: string) => {
     if (iconCode.includes('01'))

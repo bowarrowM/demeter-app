@@ -11,7 +11,7 @@ import trMessages from '@/locales/tr.json';
 
 // Flatten nested objects (locale.json respone) - redux does not allow un-flattened
 function flattenMessages(
-  nestedMessages: Record<string, any>,
+  nestedMessages: Record<string, unknown>,
   prefix = ''
 ): Record<string, string> {
   return Object.keys(nestedMessages).reduce(
@@ -22,7 +22,10 @@ function flattenMessages(
       if (typeof value === 'string') {
         messages[prefixedKey] = value;
       } else {
-        Object.assign(messages, flattenMessages(value, prefixedKey));
+        Object.assign(
+          messages,
+          flattenMessages(value as Record<string, unknown>, prefixedKey)
+        );
       }
 
       return messages;
