@@ -29,3 +29,9 @@ export const store = configureStore({
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+
+// npm run dev error:
+
+//  ✓ Compiled /_not-found in 350ms (768 modules)
+// redux-persist failed to create sync storage. falling back to noop storage.
