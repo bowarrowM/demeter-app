@@ -39,7 +39,7 @@ export default function Navbar() {
             <Link href="/welcome" className="flex items-center space-x-2">
               <SparklesIcon className="h-8 w-8 text-green-600" />
               <span className="font-bold text-xl text-gray-800">
-                AgriWeather
+                DEMETER
               </span>
             </Link>
 
