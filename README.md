@@ -18,13 +18,14 @@ Launch The Repo On Your Machine
    npm install
 
 3) Set up environment variables and database
-   cp .env.example .env
+  * do not forget to remove comments *
+    cp .env.example .env
 
-4) npx prisma db push
+5) npx prisma db push
    npx prisma generate
    npx prisma migrate dev --name init
 
-5) Run the development server.
+6) Run the development server.
    npm run dev
 
 {-- 6) To start an actual server:
