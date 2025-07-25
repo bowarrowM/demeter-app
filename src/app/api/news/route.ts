@@ -1,28 +1,23 @@
-// mock - dummy data
-import { NextResponse } from 'next/server';
+// app/api/news/route.ts
+import { NextRequest, NextResponse } from 'next/server'
+import { PrismaClient, News as NewsModel } from '@prisma/client'
 
-export async function GET() {
-  try {
-    const mockNews = [
-      {
-        id: 1,
-        title: 'Soğan fiyatlarında artış',
-        content: 'Kötü hava koşulları soğanı vurdu',
-        date: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        title: 'Biber fiyatlarında artış',
-        content: 'Kötü hava koşulları biberi vurdu',
-        date: new Date().toISOString(),
-      },
-    ];
+const prisma = new PrismaClient()
 
-    return NextResponse.json(mockNews);
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to fetch data' },
-      { status: 500 }
-    );
-  }
+export async function GET(req: NextRequest) {
+  const acceptLang = req.headers.get('accept-language') || 'en'
+  const locale = acceptLang.startsWith('tr') ? 'tr' : 'en'
+
+  const news = await prisma.news.findMany({
+    orderBy: { date: 'desc' },
+  })
+
+  const localizedNews = news.map((item: NewsModel) => ({
+    id: item.id,
+    title: locale === 'tr' ? item.title_tr : item.title_en,
+    content: locale === 'tr' ? item.content_tr : item.content_en,
+    date: item.date.toISOString().split('T')[0],
+  }))
+
+  return NextResponse.json(localizedNews)
 }

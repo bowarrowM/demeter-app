@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { Sun, Cloud, CloudRain, Snowflake } from 'lucide-react';
+import { Sun, Cloud, CloudRain, Snowflake, Droplet, Wind, AlertCircle } from 'lucide-react';
 
 interface WeatherData {
   temperature: number;
@@ -30,20 +30,31 @@ export default function WeatherCard({
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [weeklyData, setWeeklyData] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    //
-
     const fetchWeatherData = async () => {
       setLoading(true);
+      setError(null);
+
       try {
         const type = viewType === 'today' ? 'current' : 'weekly';
         const response = await fetch(
-          `/api/weather?city=${selectedCity}&type=${type}`
+          `/api/weather?city=${encodeURIComponent(selectedCity)}&type=${type}`
         );
+
         const data = await response.json();
 
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch weather data');
+        }
+
         if (viewType === 'today') {
+          // Check if the response has the expected structure
+          if (!data.main || !data.weather || !data.wind) {
+            throw new Error('Invalid weather data format');
+          }
+
           setWeatherData({
             temperature: Math.round(data.main.temp),
             description: data.weather[0].description,
@@ -52,8 +63,11 @@ export default function WeatherCard({
             icon: data.weather[0].icon,
           });
         } else {
-          // Process weekly forecast data
-          // added item type details, any caused eslint format issues
+          // Check if the response has the expected structure for weekly data
+          if (!data.list || !Array.isArray(data.list)) {
+            throw new Error('Invalid weekly weather data format');
+          }
+
           const processedWeekly = data.list
             .slice(0, 7)
             .map(
@@ -69,114 +83,147 @@ export default function WeatherCard({
                 icon: item.weather[0].icon,
               })
             );
-
           setWeeklyData(processedWeekly);
         }
       } catch (error) {
         console.error('Failed to fetch weather:', error);
+        setError(error instanceof Error ? error.message : 'Failed to fetch weather data');
       } finally {
         setLoading(false);
       }
     };
-    fetchWeatherData();
+
+    if (selectedCity) {
+      fetchWeatherData();
+    }
   }, [selectedCity, viewType]);
 
   const getWeatherIcon = (iconCode: string) => {
     if (iconCode.includes('01'))
-      return <Sun className="h-8 w-8 text-yellow-500" />;
+      return <Sun className="h-10 w-10 text-yellow-500" />;
     if (
       iconCode.includes('02') ||
       iconCode.includes('03') ||
       iconCode.includes('04')
     )
-      return <Cloud className="h-8 w-8 text-gray-500" />;
+      return <Cloud className="h-10 w-10 text-gray-500" />;
     if (iconCode.includes('09') || iconCode.includes('10'))
-      return <CloudRain className="h-8 w-8 text-blue-500" />;
+      return <CloudRain className="h-10 w-10 text-blue-500" />;
     if (iconCode.includes('13'))
-      return <Snowflake className="h-8 w-8 text-blue-300" />;
-    return <Sun className="h-8 w-8 text-yellow-500" />;
+      return <Snowflake className="h-10 w-10 text-blue-300" />;
+    return <Sun className="h-10 w-10 text-yellow-500" />;
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold text-gray-800">
-          {intl.formatMessage({ id: 'weather.title' })} - {selectedCity},{' '}
-          {selectedCountry}
-        </h3>
+    <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg p-6 w-full max-w-2xl border border-blue-100">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <div>
+          <h3 className="text-xl font-bold text-gray-800">
+            {intl.formatMessage({ id: 'weather.title' })}
+          </h3>
+          <p className="text-gray-600 mt-1">
+            {selectedCity}, {selectedCountry}
+          </p>
+        </div>
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 bg-blue-50 p-1 rounded-lg">
           <button
             onClick={() => onViewTypeChange('today')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition duration-300 ${
-              viewType === 'today'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${viewType === 'today'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-600 hover:text-blue-600'
+              }`}
           >
             {intl.formatMessage({ id: 'weather.today' })}
           </button>
           <button
             onClick={() => onViewTypeChange('week')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition duration-300 ${
-              viewType === 'week'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${viewType === 'week'
+              ? 'bg-white text-blue-600 shadow-sm'
+              : 'text-gray-600 hover:text-blue-600'
+              }`}
           >
-            {intl.formatMessage({ id: 'weather.week' })}
+            {intl.formatMessage({ id: 'weather.thisWeek' })}
           </button>
         </div>
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center h-32">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="flex justify-center items-center h-48">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      ) : error ? (
+        <div className="flex flex-col items-center justify-center h-48 text-center">
+          <AlertCircle className="h-12 w-12 text-red-500 mb-4" />
+          <p className="text-red-600 font-medium mb-2">Weather data unavailable</p>
+          <p className="text-gray-500 text-sm">{error}</p>
         </div>
       ) : (
         <div>
           {viewType === 'today' && weatherData ? (
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                {getWeatherIcon(weatherData.icon)}
-              </div>
-              <div className="text-4xl font-bold text-gray-800 mb-2">
-                {weatherData.temperature}°C
-              </div>
-              <div className="text-gray-600 capitalize mb-6">
-                {weatherData.description}
-              </div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <div className="font-semibold text-gray-800">
-                    {intl.formatMessage({ id: 'weather.humidity' })}
+            <div className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-xl p-6">
+              <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="flex items-center gap-6">
+                  <div className="bg-white/20 p-4 rounded-full">
+                    {getWeatherIcon(weatherData.icon)}
                   </div>
-                  <div className="text-gray-600">{weatherData.humidity}%</div>
+                  <div>
+                    <div className="text-5xl font-bold">
+                      {weatherData.temperature}°C
+                    </div>
+                    <div className="text-xl capitalize mt-2 font-medium">
+                      {weatherData.description}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center p-3 bg-gray-50 rounded">
-                  <div className="font-semibold text-gray-800">
-                    {intl.formatMessage({ id: 'weather.wind' })}
+
+                <div className="flex gap-6 mt-6 md:mt-0">
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center gap-2">
+                      <Droplet className="h-5 w-5 text-blue-100" />
+                      <span className="font-medium">
+                        {intl.formatMessage({ id: 'weather.humidity' })}
+                      </span>
+                    </div>
+                    <div className="text-2xl font-bold mt-1">
+                      {weatherData.humidity}%
+                    </div>
                   </div>
-                  <div className="text-gray-600">
-                    {weatherData.windSpeed} m/s
+
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center gap-2">
+                      <Wind className="h-5 w-5 text-blue-100" />
+                      <span className="font-medium">
+                        {intl.formatMessage({ id: 'weather.windSpeed' })}
+                      </span>
+                    </div>
+                    <div className="text-2xl font-bold mt-1">
+                      {weatherData.windSpeed} m/s
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3">
               {weeklyData.map((day, index) => (
-                <div key={index} className="text-center p-3 bg-gray-50 rounded">
-                  <div className="text-xs text-gray-600 mb-2">
+                <div
+                  key={index}
+                  className="bg-white rounded-xl p-3 text-center shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                >
+                  <div className="text-sm font-medium text-gray-600 mb-3">
                     {new Date(
                       Date.now() + index * 24 * 60 * 60 * 1000
                     ).toLocaleDateString(intl.locale, { weekday: 'short' })}
                   </div>
-                  <div className="flex justify-center mb-2">
+                  <div className="flex justify-center mb-3">
                     {getWeatherIcon(day.icon)}
                   </div>
-                  <div className="text-sm font-semibold">
+                  <div className="text-lg font-bold text-gray-800">
                     {day.temperature}°C
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1 capitalize">
+                    {day.description}
                   </div>
                 </div>
               ))}

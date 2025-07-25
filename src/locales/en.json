@@ -13,50 +13,37 @@
     "confirm": "Confirm",
     "close": "Close"
   },
-  "navigation": {
-    "home": "Home",
+  "nav": {
     "welcome": "Welcome",
     "weather": "Weather",
-    "seasonalProduce": "Seasonal Produce",
-    "profile": "Profile",
-    "settings": "Settings",
-    "logout": "Logout",
-    "login": "Login",
-    "signup": "Sign Up"
+    "produce": "Seasonal Produce"
   },
   "auth": {
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
-    "signOut": "Sign Out",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signout": "Sign Out",
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password",
-    "firstName": "First Name",
-    "lastName": "Last Name",
     "fullName": "Full Name",
-    "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember Me",
     "createAccount": "Create Account",
     "alreadyHaveAccount": "Already have an account?",
     "dontHaveAccount": "Don't have an account?",
-    "resetPassword": "Reset Password",
     "enterEmail": "Enter your email address",
     "enterPassword": "Enter your password",
-    "confirmNewPassword": "Confirm new password",
-    "passwordResetSent": "Password reset link sent to your email",
     "invalidCredentials": "Invalid email or password",
     "accountCreated": "Account created successfully",
     "passwordsDoNotMatch": "Passwords do not match",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
-    "weakPassword": "Password must be at least 8 characters long",
+    "invalidPassword": "Password  must contain at least 6 chaaracters.",
     "invalidEmail": "Please enter a valid email address",
     "accountExists": "An account with this email already exists",
-    "signInWithGoogle": "Sign in with Google",
-    "signInWithGithub": "Sign in with GitHub",
+    "signinSubtitle": "Welcome back! Please sign in to continue",
+    "forgotPassword": "Forgot password?",
     "orContinueWith": "Or continue with",
-    "welcomeBack": "Welcome back!",
-    "getStarted": "Get started today"
+    "terms": "By signing in, you agree to our Terms of Service and Privacy Policy"
   },
   "welcome": {
     "title": "Welcome",
@@ -64,56 +51,38 @@
     "guestGreeting": "Welcome, Guest!",
     "subtitle": "Your agricultural dashboard",
     "demeter": {
-      "title": "Demeter - Goddess of Agriculture",
-      "description": "Demeter is the ancient Greek goddess of agriculture, harvest, and nature. She presided over grains and the fertility of the earth. Her Roman equivalent is Ceres, from whom we get the word 'cereal'.",
-      "funFact": "Fun Fact: Demeter's sacred symbol is the wheat sheaf, representing the bounty of the harvest.",
-      "mythology": "In Greek mythology, Demeter's grief over her daughter Persephone's abduction to the underworld caused the seasons to change, creating winter when Persephone was away and spring when she returned."
-    },
-    "produceNews": {
-      "title": "Turkish Produce Market News",
-      "subtitle": "Real-time updates on produce prices",
-      "lastUpdated": "Last updated: {time}",
-      "priceIncrease": "↗ Price Increase",
-      "priceDecrease": "↘ Price Decrease",
-      "priceStable": "→ Price Stable",
-      "currency": "₺",
-      "perKg": "per kg",
-      "marketTrends": "Market Trends",
-      "seasonalImpact": "Seasonal Impact",
-      "weatherImpact": "Weather Impact",
-      "exportData": "Export Data",
-      "noDataAvailable": "No data available at the moment",
-      "refreshData": "Refresh Data"
+      "title": "Welcome to Demeter",
+      "newsTitle": "Latest News",
+      "description1": "Track seasonal produce and weather trends.",
+      "description2": "Organize your food, farming, or wellness activities.",
+      "description3": "Empower your lifestyle with nature-aware planning.",
+      "goddess": "DEMETER, Goddess of harvest and fertility",
+      "demeter1": "about demeter1",
+      "demeter2": "about demeter2",
+      "demeter3": "about demeter3",
+      "demeter4": "about demeter4"
     }
   },
   "weather": {
     "title": "Weather Dashboard",
+    "forecastDescription": "View weather data and insights",
     "currentWeather": "Current Weather",
     "forecast": "Forecast",
     "today": "Today",
     "thisWeek": "This Week",
-    "selectRegion": "Select Region",
+    "selectLocation": "Select Region",
+    "selectLocationHint": "Choose a city and country to view the weather",
+    "footerText": "Weather forecast data was provided via OpenWeather",
     "temperature": "Temperature",
     "dayTemp": "Day Temperature",
     "nightTemp": "Night Temperature",
     "humidity": "Humidity",
     "windSpeed": "Wind Speed",
-    "pressure": "Pressure",
-    "visibility": "Visibility",
-    "uvIndex": "UV Index",
-    "sunrise": "Sunrise",
-    "sunset": "Sunset",
-    "feelsLike": "Feels like",
-    "high": "High",
-    "low": "Low",
-    "precipitation": "Precipitation",
-    "cloudCover": "Cloud Cover",
     "yearlyChart": "Yearly Temperature Chart",
     "monthlyAverage": "Monthly Average",
     "selectYear": "Select Year",
     "temperatureUnit": "°C",
     "windUnit": "km/h",
-    "pressureUnit": "hPa",
     "visibilityUnit": "km",
     "precipitationUnit": "mm",
     "regions": {
@@ -121,12 +90,7 @@
       "ankara": "Ankara",
       "izmir": "Izmir",
       "bursa": "Bursa",
-      "antalya": "Antalya",
-      "adana": "Adana",
-      "gaziantep": "Gaziantep",
-      "konya": "Konya",
-      "mersin": "Mersin",
-      "diyarbakir": "Diyarbakır"
+      "antalya": "Antalya"
     },
     "weatherConditions": {
       "sunny": "Sunny",
@@ -162,50 +126,12 @@
       "december": "December"
     }
   },
-  "seasonalProduce": {
-    "title": "Seasonal Produce",
-    "subtitle": "Discover what's in season",
-    "currentSeason": "Current Season",
-    "spring": "Spring",
-    "summer": "Summer",
-    "autumn": "Autumn",
-    "winter": "Winter",
-    "inSeason": "In Season Now",
-    "comingSoon": "Coming Soon",
-    "localName": "Local Name",
-    "latinName": "Scientific Name",
-    "learnMore": "Learn More",
-    "nutritionFacts": "Nutrition Facts",
-    "cookingTips": "Cooking Tips",
-    "storageInfo": "Storage Information",
-    "harvestTime": "Harvest Time",
-    "growingRegions": "Growing Regions",
-    "seasonality": "Seasonality",
-    "availability": "Availability",
-    "priceRange": "Price Range",
-    "qualityIndicators": "Quality Indicators",
-    "recipes": "Popular Recipes",
-    "healthBenefits": "Health Benefits",
-    "varieties": "Common Varieties",
-    "producePlaceholder": {
-      "name": "Seasonal Produce",
-      "latin": "Scientific Name",
-      "description": "Click to learn more about this produce item"
-    },
-    "categories": {
-      "fruits": "Fruits",
-      "vegetables": "Vegetables",
-      "herbs": "Herbs",
-      "grains": "Grains",
-      "legumes": "Legumes",
-      "nuts": "Nuts"
-    },
-    "filters": {
-      "all": "All",
-      "organic": "Organic",
-      "local": "Local",
-      "imported": "Imported"
-    }
+  "produce": {
+    "title": "Seasonal Market Updates",
+    "region": "Region",
+    "learnMore": "Learn more at",
+    "season": "Season",
+    "subtitle": "Easily access the latest market news for your selected region from this page"
   },
   "errors": {
     "generic": "Something went wrong. Please try again.",
@@ -229,9 +155,7 @@
   },
   "languages": {
     "english": "English",
-    "turkish": "Türkçe",
-    "selectLanguage": "Select Language",
-    "changeLanguage": "Change Language"
+    "turkish": "Türkçe"
   },
   "accessibility": {
     "menuButton": "Open navigation menu",

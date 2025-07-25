@@ -70,6 +70,15 @@ model WeatherData {
   createdAt   DateTime @default(now())
 }
 
+model News {
+  id          Int      @id @default(autoincrement())
+  title_en    String
+  title_tr    String
+  content_en  String
+  content_tr  String
+  date        DateTime @default(now())
+}
+
 model ProduceItem {
   id         String @id @default(cuid())
   name       String

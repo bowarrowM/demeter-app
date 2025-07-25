@@ -33,7 +33,8 @@ export default function HomePage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-gray-800 mb-8">
-          {intl.formatMessage({ id: 'app.title' })}
+          DEMETER 
+          {/* {intl.formatMessage({ id: 'app.title' })} */}
         </h1>
         <div className="space-x-4">
           <Link
