@@ -87,10 +87,10 @@ export default function SignUpPage() {
               <UserIcon className="h-8 w-8 text-white" />
             </div>
             <h2 className="text-2xl font-bold text-white">
-              {intl.formatMessage({ id: 'auth.signup.title' })}
+              {intl.formatMessage({ id: 'auth.signup' })}
             </h2>
             <p className="mt-2 text-emerald-100 text-sm">
-              {intl.formatMessage({ id: 'auth.signup.subtitle' })}
+              {intl.formatMessage({ id: 'auth.createAccount' })}
             </p>
           </div>
 

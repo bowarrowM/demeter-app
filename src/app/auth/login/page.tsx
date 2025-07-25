@@ -76,7 +76,7 @@ export default function SignInPage() {
               {intl.formatMessage({ id: 'auth.signin' })}
             </h2>
             <p className="mt-2 text-emerald-100 text-sm">
-              {intl.formatMessage({ id: 'auth.signin.subtitle' })}
+              {intl.formatMessage({ id: 'auth.signinSubtitle' })}
             </p>
           </div>
 
