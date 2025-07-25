@@ -127,7 +127,7 @@ export default function SignUpPage() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.fullName' })}
                 />
               </div>
@@ -143,7 +143,7 @@ export default function SignUpPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.enterEmail' })}
                 />
               </div>
@@ -159,7 +159,7 @@ export default function SignUpPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.enterPassword' })}
                 />
                 <button
@@ -186,7 +186,7 @@ export default function SignUpPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.confirmPassword' })}
                 />
                 <button

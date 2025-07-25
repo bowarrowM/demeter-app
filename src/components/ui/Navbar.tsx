@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 import { setLocale } from '@/store/slices/localeSlice';
 import {
+  UserIcon,
   HomeIcon,
   CloudIcon,
   SparklesIcon,
@@ -79,7 +80,11 @@ export default function Navbar() {
               <span className="uppercase font-medium">{currentLocale}</span>
             </button>
 
-            <div className="text-gray-700">{session?.user?.name}</div>
+            <div className="text-gray-700 flex items-center space-x-1">
+              <UserIcon className="h-5 w-5"/>
+              <h1>{session?.user?.name}</h1>
+
+            </div>
 
             <button
               onClick={handleSignOut}

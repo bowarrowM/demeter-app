@@ -113,7 +113,7 @@ export default function SignInPage() {
                   required
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.enterEmail' })}
                 />
               </div>
@@ -129,7 +129,7 @@ export default function SignInPage() {
                   required
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-400"
+                  className="pl-10 w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-emerald-500 placeholder-emerald-200"
                   placeholder={intl.formatMessage({ id: 'auth.enterPassword' })}
                 />
                 <button
